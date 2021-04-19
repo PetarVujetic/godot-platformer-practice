@@ -1,6 +1,6 @@
 extends Actor
 
-var jumped_once: bool
+var jump_count:= 0
 export var stomp_impulse: = 1000.0
 
 func _on_EnemyDetector_area_entered(area):
@@ -19,23 +19,21 @@ func _physics_process(delta: float) -> void:
 
 func get_direction() -> Vector2:
 		var jump: bool
+		if is_on_floor():
+			jump_count = 0
 		if is_on_floor() and Input.is_action_just_pressed("jump"):
-			jumped_once = true
+			jump_count += 1
 			jump = true
 		else: 
 			jump = false
-			if jumped_once == true and Input.is_action_just_pressed("jump"):
-				jumped_once = false
+			if jump_count < 2 and Input.is_action_just_pressed("jump"):
+				jump_count += 1
 				jump = true
 			
-
-			
-	
 		return Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
 		-Input.get_action_strength("jump") if jump
-		else 0.0
-	)
+		else 0.0)	
 
 
 func calculate_move_velocity(

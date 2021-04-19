@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="PlayButton" type="Button"]
+margin_right = 468.0
+margin_bottom = 131.0
+size_flags_vertical = 3
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
